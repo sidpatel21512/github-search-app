@@ -1,0 +1,15 @@
+<!-- <div class="form-group">
+    <label for="search">Search:</label>
+    <input type="text" class="form-control" id="search" [(ngModel)]="searchString">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+</div> -->
+<div class="topnav">
+    <div class="search-container">
+        <input type="text" placeholder="Search.." name="search" id="search" [(ngModel)]="searchString">
+        <button type="submit" (click)="onSubmit()"><i class="fa fa-search"></i></button>
+    </div>
+</div>
+<div class="container">
+<app-user-profile [userDetails]="userDetails" ></app-user-profile>
+<app-user-repos [userRepos]="userRepos"></app-user-repos>
+</div>

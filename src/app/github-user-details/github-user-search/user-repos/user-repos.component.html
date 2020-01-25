@@ -1,0 +1,22 @@
+<div *ngIf="userRepos" class="container table-responsive">
+    <h3>Repositories</h3>
+    <p>Top 5 repos by stargazers count</p>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Repo Name</th>
+                <th>Stargazers Count</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let repo of userRepos">
+                <td><i class="fa fa-unlock" tooltip="public"></i></td>
+                <td>{{repo?.name}}</td>
+                <td>{{repo?.stargazers_count}}</td>
+                <td>{{repo?.description}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
