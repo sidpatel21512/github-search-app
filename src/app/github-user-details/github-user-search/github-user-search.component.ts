@@ -23,18 +23,19 @@ export class GithubUserSearchComponent implements OnInit {
 
   // This method call on click of submit button
   onSubmit(): void {
-    console.log('string:', this.searchString);
     this.githubService.getUserDetails(this.searchString)
       .subscribe((response: IUserDetails) => {
         this.userDetails = response;
         this.githubService.getUserReposFilterByStargazersCount(response.repos_url)
           .subscribe((repos: IRepoDetails[]) => {
-            console.log('repos:', repos);
             this.userRepos = repos;
           }, (error: string) => {
             console.log('error:', error);
           });
-      }, (error: string) => {
+      }, (error: any) => {
+        if (error.status === 404) {
+          alert(`No record found for ${this.searchString}, please enter valid user name`);
+        }
         console.log('error:', error);
       });
   }

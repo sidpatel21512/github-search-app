@@ -11,7 +11,9 @@ describe('ExceptionHandler', () => {
   });
 
   it('should have client-side error and return default error message', () => {
-    const errorEvent = {} as ErrorEvent;
+    const errorEvent = {
+      error: new ErrorEvent('type')
+    };
     const errorMessage = ExceptionHandler.handleError(errorEvent);
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(errorMessage instanceof Observable).toBeTruthy('errorMessage type is not observable');
