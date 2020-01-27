@@ -28,11 +28,11 @@ export class GithubService {
       .pipe(catchError(ExceptionHandler.handleError));
   }
 
-  // Get user's top five repos filter by highest stargazers counts 
+  // Get user's top five repos filter by highest stargazers counts
   getUserReposFilterByStargazersCount(repoUrl: string): Observable<IRepoDetails[]> {
     return this.getUserRepos(repoUrl).pipe(mergeMap((repos: IRepoDetails[]) => {
       repos.sort((h, s) => h.stargazers_count > s.stargazers_count ? -1 : h.stargazers_count < s.stargazers_count ? 1 : 0);
-      return of(repos.slice(0,5));
+      return of(repos.slice(0, 5));
     }));
   }
 }

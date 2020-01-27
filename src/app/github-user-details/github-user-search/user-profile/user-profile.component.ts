@@ -9,11 +9,10 @@ import { IUserDetails } from 'src/app/github-user-details/models/IUserDetails';
 export class UserProfileComponent implements OnInit, OnChanges {
   @Input()
   userDetails: IUserDetails;
-  
+
   constructor() { }
 
-  ngOnChanges(){
-    console.log('d:', this.userDetails);
+  ngOnChanges() {
   }
 
   ngOnInit() {
