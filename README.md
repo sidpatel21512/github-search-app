@@ -1,3 +1,8 @@
+# NOTE:
+- Master brnach is updated with Latest code.
+- Please see code-coverage by running `npm run test` command.
+- node_modules.zip is kept, incase app is not running in local.
+
 # GithubSearchApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
@@ -13,6 +18,10 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests with code-coverage
+
+Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io). Find `coverage\github-search-app\index.html` file to see 100% code-coverage
 
 ## Running unit tests
 
