@@ -21,7 +21,7 @@ export class GithubUserSearchComponent implements OnInit {
   }
 
 
-  // This method call on click of submit button
+  // This method call on click of submit button and retrive the user details and it's repos details.
   onSubmit(): void {
     this.githubService.getUserDetails(this.searchString)
       .subscribe((response: IUserDetails) => {
@@ -29,14 +29,17 @@ export class GithubUserSearchComponent implements OnInit {
         this.githubService.getUserReposFilterByStargazersCount(response.repos_url)
           .subscribe((repos: IRepoDetails[]) => {
             this.userRepos = repos;
-          }, (error: string) => {
-            console.log('error:', error);
+          }, (error: any) => {
+            console.warn('error:', error);
+            alert(error);
           });
       }, (error: any) => {
+        console.warn('error:', error);
         if (error.status === 404) {
           alert(`No record found for ${this.searchString}, please enter valid user name`);
+        } else {
+          alert(error);
         }
-        console.log('error:', error);
       });
   }
 

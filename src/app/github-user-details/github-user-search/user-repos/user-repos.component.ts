@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { IRepoDetails } from '../../models/IRepoDetails';
 
 @Component({
@@ -6,15 +6,15 @@ import { IRepoDetails } from '../../models/IRepoDetails';
   templateUrl: './user-repos.component.html',
   styleUrls: ['./user-repos.component.css']
 })
-export class UserReposComponent implements OnInit {
+export class UserReposComponent implements OnInit,OnChanges {
   @Input()
   userRepos: IRepoDetails[];
 
   constructor() { }
 
   ngOnChanges() {
-    console.log('r:', this.userRepos);
   }
+
   ngOnInit() {
   }
 
