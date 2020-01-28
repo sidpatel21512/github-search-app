@@ -9,6 +9,7 @@ import { GithubService } from '../services/github.service';
 import { throwError, of } from 'rxjs';
 import { Constants } from '../common/constants/constants';
 import { IUserDetails } from '../models/IUserDetails';
+import { IRepoDetails } from '../models/IRepoDetails';
 
 describe('GithubUserSearchComponent', () => {
   let component: GithubUserSearchComponent;
@@ -83,6 +84,18 @@ describe('GithubUserSearchComponent', () => {
         component.onSubmit();
         expect(console.warn).toHaveBeenCalledTimes(1);
       });
+    });
+  });
+
+  describe('loadCacheData', () => {
+    it('should load Cache Data', () => {
+      component.loadCacheData({
+        searchString: 'searchString',
+        userDetails: {} as IUserDetails,
+        userRepos: [] as IRepoDetails[]
+      });
+      expect(component.userDetails).toEqual({} as IUserDetails, 'userDetails is not as expected');
+      expect(component.userRepos).toEqual([] as IRepoDetails[], 'userRepos is not as expected');
     });
   });
 });
