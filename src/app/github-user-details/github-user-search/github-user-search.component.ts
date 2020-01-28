@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { GithubService } from "../services/github.service";
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { GithubService } from '../services/github.service';
 import { IUserDetails } from '../models/IUserDetails';
 import { IRepoDetails } from '../models/IRepoDetails';
+import { CacheService } from '../services/cache.service';
+import { ICachedUserData } from '../models/ICachedUserData';
 
 @Component({
   selector: 'app-github-user-search',
@@ -13,13 +15,14 @@ export class GithubUserSearchComponent implements OnInit {
   public searchString: string;
   public userDetails: IUserDetails;
   public userRepos: IRepoDetails[];
-  constructor(private githubService: GithubService) {
+  public cachedSearchStrings: Array<ICachedUserData>;
+  constructor(private githubService: GithubService, private cacheService: CacheService) {
     this.searchString = '';
+    this.cachedSearchStrings = this.cacheService.getCachedSearchStringData();
   }
 
   ngOnInit() {
   }
-
 
   // This method call on click of submit button and retrive the user details and it's repos details.
   onSubmit(): void {
@@ -29,6 +32,7 @@ export class GithubUserSearchComponent implements OnInit {
         this.githubService.getUserReposFilterByStargazersCount(response.repos_url)
           .subscribe((repos: IRepoDetails[]) => {
             this.userRepos = repos;
+            this.cacheService.AddSearchStringDataIntoCache(this.searchString, this.userDetails, this.userRepos);
           }, (error: any) => {
             console.warn('error:', error);
             alert(error);
@@ -43,4 +47,9 @@ export class GithubUserSearchComponent implements OnInit {
       });
   }
 
+  // Loads cached data for search string
+  loadCacheData(cacheData: ICachedUserData): void {
+    this.userDetails = cacheData.userDetails;
+    this.userRepos = cacheData.userRepos;
+  }
 }
